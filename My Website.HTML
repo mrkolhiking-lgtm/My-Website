@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Multi-Feature Web Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --border-color: #e5e7eb;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #111827;
+            --text-color: #f3f4f6;
+            --card-bg: #1f2937;
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --border-color: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .theme-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .theme-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input, .input-group select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 5px;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .result-box {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* Clock Feature */
+        .clock {
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .counter-box {
+            text-align: center;
+        }
+
+        .counter-value {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-group button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Motivation Quote Box */
+        .quote-text {
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            min-height: 60px;
+        }
+
+        /* Password Display Style */
+        .pass-display {
+            background: var(--bg-color);
+            padding: 10px;
+            border: 1px dashed var(--border-color);
+            border-radius: 5px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 16px;
+            margin-top: 10px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <header>
+        <h1>⚡ Ultimate Multi-Feature Hub</h1>
+        <button class="theme-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <!-- Feature 1: Live Clock -->
+        <div class="card">
+            <h2>⏰ Live Digital Clock</h2>
+            <div class="clock" id="clock">00:00:00 AM</div>
+            <p id="date" style="text-align: center; font-size: 14px;"></p>
+        </div>
+
+        <!-- Feature 2: Age Calculator -->
+        <div class="card">
+            <h2>🎂 Age Calculator</h2>
+            <div class="input-group">
+                <label>Date of Birth:</label>
+                <input type="date" id="dobInput">
+            </div>
+            <button class="action-btn" onclick="calculateAge()">Calculate Age</button>
+            <div class="result-box" id="ageResult"></div>
+        </div>
+
+        <!-- Feature 3: Weather Update -->
+        <div class="card">
+            <h2>🌤️ Weather Simulator</h2>
+            <div class="input-group">
+                <label>Select City:</label>
+                <select id="citySelect">
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                </select>
+            </div>
+            <button class="action-btn" onclick="getWeather()">Check Weather</button>
+            <div class="result-box" id="weatherResult"></div>
+        </div>
+
+        <!-- Feature 4: Daily Motivation -->
+        <div class="card">
+            <h2>💡 Daily Motivation</h2>
+            <div class="quote-text" id="quoteText">"Success is not final; failure is not fatal: It is the courage to continue that counts."</div>
+            <button class="action-btn" onclick="getNewQuote()">Show New Quote</button>
+        </div>
+
+        <!-- Feature 5: Password Generator -->
+        <div class="card">
+            <h2>🔒 Password Generator</h2>
+            <div class="input-group">
+                <label>Password Length:</label>
+                <input type="number" id="passLength" value="10" min="6" max="25">
+            </div>
+            <button class="action-btn" onclick="generatePassword()">Generate Password</button>
+            <div class="pass-display" id="passDisplay">Password will be shown here</div>
+        </div>
+
+        <!-- Feature 6: Currency Converter -->
+        <div class="card">
+            <h2>💱 Currency Converter (PKR)</h2>
+            <div class="input-group">
+                <label>Amount (PKR):</label>
+                <input type="number" id="pkrInput" placeholder="e.g., 28000">
+            </div>
+            <div class="input-group">
+                <label>Convert To:</label>
+                <select id="currencySelect">
+                    <option value="USD">US Dollar ($)</option>
+                    <option value="EUR">Euro (€)</option>
+                </select>
+            </div>
+            <button class="action-btn" onclick="convertCurrency()">Convert</button>
+            <div class="result-box" id="currencyResult"></div>
+        </div>
+
+        <!-- Feature 7: Stopwatch -->
+        <div class="card counter-box">
+            <h2>⏱️ Stopwatch</h2>
+            <div class="counter-value" id="stopwatchDisplay" style="font-size: 32px;">00:00:00</div>
+            <div class="btn-group">
+                <button onclick="startStopwatch()" style="background: #10b981;">Start</button>
+                <button onclick="stopStopwatch()" style="background: #ef4444;">Stop</button>
+                <button onclick="resetStopwatch()" style="background: #6b7280;">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.theme-btn');
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                btn.textContent = '☀️ Light Mode';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                btn.textContent = '🌙 Dark Mode';
+            }
+        }
+
+        // Live Clock Logic
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            
+            document.getElementById('clock').textContent = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Age Calculator Logic
+        function calculateAge() {
+            const dob = document.getElementById('dobInput').value;
+            const resultDiv = document.getElementById('ageResult');
+
+            if (!dob) {
+                resultDiv.textContent = "Please select your date of birth!";
+                resultDiv.style.color = "#ef4444";
+                return;
+            }
+
+            const birthDate = new Date(dob);
+            const today = new Date();
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            resultDiv.innerHTML = `Your age is: ${years} years, ${months} months, and ${days} days.`;
+            resultDiv.style.color = "var(--primary-color)";
+        }
+
+        // Weather Simulator Logic
+        function getWeather() {
+            const city = document.getElementById('citySelect').value;
+            const resultDiv = document.getElementById('weatherResult');
+            const temps = { 
+                "Karachi": "60°C, Breezy", 
+                "Lahore": "38°C, Sunny", 
+                "Islamabad": "30°C, Pleasant weather", 
+                "Peshawar": "36°C, Hot", 
+                "Quetta": "25°C, Cool breeze" 
+            };
+            
+            resultDiv.innerHTML = `Weather in ${city}: ${temps[city]}`;
+            resultDiv.style.color = "#10b981";
+        }
+
+        // Daily Motivation Quotes Logic
+        const quotes = [
+            "\"Success is not final; failure is not fatal: It is the courage to continue that counts.\"",
+            "\"Every new day brings a fresh start for you.\"",
+            "\"Doubt kills more dreams than failure ever will.\"",
+            "\"Work hard in silence, let your success make the noise.\"",
+            "\"Smile, because difficulties only come to make you stronger.\""
+        ];
+
+        function getNewQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('quoteText').textContent = quotes[randomIndex];
+        }
+
+        // Password Generator Logic
+        function generatePassword() {
+            const length = parseInt(document.getElementById('passLength').value) || 10;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*!";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('passDisplay').textContent = password;
+        }
+
+        // Currency Converter Logic (Approx rates)
+        function convertCurrency() {
+            const pkr = parseFloat(document.getElementById('pkrInput').value);
+            const currency = document.getElementById('currencySelect').value;
+            const resultDiv = document.getElementById('currencyResult');
+
+            if (!pkr || pkr <= 0) {
+                resultDiv.textContent = "Please enter a valid amount!";
+                resultDiv.style.color = "#ef4444";
+                return;
+            }
+
+            let converted = 0;
+            if (currency === "USD") {
+                converted = (pkr / 278).toFixed(2); // Approximate rate
+                resultDiv.innerHTML = `${pkr} PKR = $${converted} USD`;
+            } else {
+                converted = (pkr / 300).toFixed(2); // Approximate rate
+                resultDiv.innerHTML = `${pkr} PKR = €${converted} EUR`;
+            }
+            resultDiv.style.color = "#10b981";
+        }
+
+        // Stopwatch Logic
+        let stopwatchInterval;
+        let secondsElapsed = 0;
+
+        function startStopwatch() {
+            if (stopwatchInterval) return;
+            stopwatchInterval = setInterval(() => {
+                secondsElapsed++;
+                let hrs = Math.floor(secondsElapsed / 3600);
+                let mins = Math.floor((secondsElapsed % 3600) / 60);
+                let secs = secondsElapsed % 60;
+
+                let formatted = 
+                    String(hrs).padStart(2, '0') + ":" + 
+                    String(mins).padStart(2, '0') + ":" + 
+                    String(secs).padStart(2, '0');
+
+                document.getElementById('stopwatchDisplay').textContent = formatted;
+            }, 1000);
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+        }
+
+        function resetStopwatch() {
+            stopStopwatch();
+            secondsElapsed = 0;
+            document.getElementById('stopwatchDisplay').textContent = "00:00:00";
+        }
+    </script>
+</body>
+</html>
